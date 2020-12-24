@@ -1,24 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import {Header} from "../../../saveWeather/my-app/src/components/Header/Header";
+import {MainWeatherWindow} from "../../../saveWeather/my-app/src/components/Weather/MainWeatherWindow";
+import {WindowController} from "../../../saveWeather/my-app/src/components/Weather/WindowController";
+import {useDispatch} from "react-redux";
+import {useEffect} from "react";
+import {saveCityInfo} from "../../../saveWeather/my-app/src/actions/getWeather";
 
 function App() {
+  const dispatch = useDispatch()
+  const getMyLocation = () => {
+    navigator.geolocation.getCurrentPosition(
+        function (position) {
+          dispatch(saveCityInfo(position.coords))
+        },
+        function (error) {
+          console.error("Error Code = " + error.code + " - " + error.message)
+        }
+    )
+  }
+  useEffect(() => getMyLocation(), [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div>
+        <Header/>
+        <MainWeatherWindow/>
+        <WindowController/>
+      </div>
   );
 }
 
