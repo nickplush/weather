@@ -1,10 +1,10 @@
 import './App.css';
-import {Header} from "../../../saveWeather/my-app/src/components/Header/Header";
-import {MainWeatherWindow} from "../../../saveWeather/my-app/src/components/Weather/MainWeatherWindow";
-import {WindowController} from "../../../saveWeather/my-app/src/components/Weather/WindowController";
+import {Header} from "../src/components/Header/Header";
+import {MainWeatherWindow} from "../src/components/Weather/MainWeatherWindow";
+import {WindowController} from "../src/components/Weather/WindowController";
 import {useDispatch} from "react-redux";
 import {useEffect} from "react";
-import {saveCityInfo} from "../../../saveWeather/my-app/src/actions/getWeather";
+import {saveCityInfo} from "../src/actions/getWeather";
 import {getFavorite} from "./actions/favoriteActions";
 
 function App() {

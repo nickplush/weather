@@ -70,9 +70,7 @@ export const Header = () => {
 
     const handlePressEnter = async (e) => {
         if (e.charCode === 13) {
-            console.log('LOOOG', 'aaaaaa')
             const variants = await getCityInfo(e.target.value)
-            console.log('LOOOG', variants)
             setSearch(variants.list)
         }
     }
@@ -119,7 +117,7 @@ export const Header = () => {
                     <div className={classes.search}>
                         <Autocomplete
                             onKeyPress={handlePressEnter}
-                            id="combo-box-demo"
+                            id="Search"
                             options={search}
                             onChange = {(event,value) => {
                                 if(value){

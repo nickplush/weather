@@ -40,7 +40,6 @@ export const MainWeatherWindow = () => {
     useEffect(() => getWeatherOfMyLocation(), [myLocation])
 
     const saveCity = () => {
-        console.log('LOOOG', myLocation)
         const fav = {
             city: weather.name + ',' + weather.sys.country,
             coords: {
