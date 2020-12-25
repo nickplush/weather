@@ -3,8 +3,35 @@ import React, {useEffect, useState} from "react";
 import {getTomorrowWeather} from "../../actions/getWeather";
 import {Typography} from "@material-ui/core";
 import {Map, Placemark, YMaps} from "react-yandex-maps";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        width: "max",
+        display: "flex"
+    },
+    card: {
+        width: theme.spacing(50),
+        background: '#DCDCDC',
+        borderRadius: 10,
+        padding: 10
+    },
+    day: {
+        display: "flex",
+        justifyContent: "start",
+        padding:5
+    },
+    map: {
+        width: theme.spacing(50),
+        height: theme.spacing(50),
+    },
+    time:{
+        width: theme.spacing(8)
+    }
+}));
 
 export const DayTomorrowWeather = () => {
+    const classes = useStyles()
     const myLocation = useSelector((state) => state.myLocation)
     const [data, setData] = useState([])
 
@@ -15,12 +42,20 @@ export const DayTomorrowWeather = () => {
     useEffect(() => fetchDayWeather(), [myLocation])
     const weatherDay = data.map(item =>{
         return(
-            <Typography key={new Date(item.dt*1000)}>
-                {new Date(item.dt*1000).getHours()}:{new Date(item.dt).getMinutes()}
-                {Math.round(item.main.temp - 273.15)} ℃,
-                {item.weather.main}
-                Wind - {item.wind.speed} meter per seconds
-            </Typography>
+            <div className={classes.day}>
+                <Typography className={classes.time}>
+                    {new Date(item.dt * 1000).getHours()}:{new Date(item.dt).getMinutes()}
+                </Typography>
+                <Typography>
+                    {Math.round(item.main.temp - 273.15)} ℃,
+                </Typography>
+                <Typography>
+                    {item.weather.main}
+                </Typography>
+                <Typography>
+                    Wind - {item.wind.speed} meter per seconds
+                </Typography>
+            </div>
         )})
     const mapData = {
         center: [myLocation.latitude, myLocation.longitude],
@@ -33,7 +68,7 @@ export const DayTomorrowWeather = () => {
 
     return (
         <div className={'container'}>
-            <div>{weatherDay}</div>
+            <div className={classes.card}>{weatherDay}</div>
             <div>
                 <YMaps>
                     <Map defaultState={mapData}>

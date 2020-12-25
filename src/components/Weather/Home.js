@@ -2,7 +2,7 @@ import React from "react";
 import {Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {saveCityInfo} from "../../actions/getWeather";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
 export const Home = () => {
     const dispatch = useDispatch()
     const classes = useStyles()
-    const arr = JSON.parse(localStorage.getItem('favorites'))||[]
+    const arr = useSelector(state=>state.favorite)
+
     const favorites = arr.map(item => {
         return (
             <div key={Math.random()} className={classes.card}

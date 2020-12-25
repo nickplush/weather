@@ -2,8 +2,9 @@ import React, {useEffect, useState} from "react";
 import {Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {getWeather} from "../../actions/getWeather";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import AddIcon from '@material-ui/icons/Add';
+import {addFavorite} from "../../actions/favoriteActions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,9 +26,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 export const MainWeatherWindow = () => {
+    const dispatch = useDispatch()
     const myLocation = useSelector((state) => state.myLocation)
     const [weather, setWeather] = useState('')
-    const arr = JSON.parse(localStorage.getItem('favorites'))||[]
+    const arr = useSelector(state => state.favorite)
 
     const getWeatherOfMyLocation = async () => {
         if (myLocation) {
@@ -38,12 +40,16 @@ export const MainWeatherWindow = () => {
     useEffect(() => getWeatherOfMyLocation(), [myLocation])
 
     const saveCity = () => {
+        console.log('LOOOG', myLocation)
         const fav = {
-            city: weather.name,
-            coords: myLocation
+            city: weather.name + ',' + weather.sys.country,
+            coords: {
+                latitude: myLocation.latitude,
+                longitude: myLocation.longitude
+            }
         }
-        arr.push(fav)
-        localStorage.setItem('favorites', JSON.stringify(arr))
+        const newArr = [...arr, fav]
+        dispatch(addFavorite(newArr))
     }
 
 
@@ -57,9 +63,13 @@ export const MainWeatherWindow = () => {
                         <Typography variant={"h3"}>{celsius} ℃</Typography>
                         <Typography
                             variant={"h4"}>{weather.name}, {weather.sys.country}</Typography>
-                        <Typography variant={"h6"}>{weather.weather[0].main}, Wind
-                            - {weather.wind.speed} meter per second</Typography>
+                        <Typography variant={"h6"}>
+                            {weather.weather[0].main}, Wind
+                            - {weather.wind.speed} meter per second
+                        </Typography>
+                        {Boolean(!arr.filter(item => JSON.stringify(item.coords) === JSON.stringify(myLocation)).length) &&
                         <AddIcon onClick={saveCity}/>
+                        }
                     </div>
                 </div>
             </div>
