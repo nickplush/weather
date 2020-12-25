@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Typography} from "@material-ui/core";
+import {Box, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {useSelector} from "react-redux";
 import {getWeekWeather} from "../../actions/getWeather";
@@ -12,9 +12,7 @@ const useStyles = makeStyles((theme) => ({
     card: {
         height: theme.spacing(15),
         width: theme.spacing(15),
-        background: '#DCDCDC',
         margin: 20,
-        borderRadius: 10,
         padding: 10
     }
 }));
@@ -36,11 +34,11 @@ export const WeekWeather = () => {
     const weatherDay = week.map(item => {
         const date = (item.dt - time)*1000
         return (
-            <div key={Math.random()} className={classes.card}>
+            <Box border={1} className={classes.card}>
                 <Typography component={'div'}>{WEEKDAYS[new Date(date).getDay()]}</Typography>
                 <Typography component={'div'}>{Math.round(item.temp.day - 273.15)} ℃</Typography>
                 <Typography component={'div'}>{item.weather[0].main}</Typography>
-            </div>
+            </Box>
         )
     })
 

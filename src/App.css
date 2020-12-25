@@ -1,5 +1,15 @@
 .container{
   display: flex;
-  justify-content: space-around;
-  margin: 10px;
+  justify-content: center;
+  margin: 25px;
+}
+.title_container{
+  display: flex;
+  justify-content: start;
+}
+.border{
+  border: 1px;
+}
+body{
+  color: darkgray;
 }

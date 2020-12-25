@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Typography} from "@material-ui/core";
+import {Box, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {getWeather} from "../../actions/getWeather";
 import {useDispatch, useSelector} from "react-redux";
@@ -8,19 +8,23 @@ import {addFavorite} from "../../actions/favoriteActions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: "max",
+        width: '100%',
+        display:"flex"
+    },
+    container: {
+        width: '98%',
         display: "flex",
         justifyContent: "center",
         alignContent: "start",
-        background: "black",
-        marginTop: theme.spacing(3),
-        color: "white"
     },
     card: {
         height: theme.spacing(30),
         display: "flex",
         flexDirection: "column",
         justifyContent: 'center'
+    },
+    addBut: {
+        marginTop: theme.spacing(12)
     }
 }));
 
@@ -37,6 +41,7 @@ export const MainWeatherWindow = () => {
             setWeather(newWeather)
         }
     }
+
     useEffect(() => getWeatherOfMyLocation(), [myLocation])
 
     const saveCity = () => {
@@ -57,20 +62,24 @@ export const MainWeatherWindow = () => {
         const celsius = Math.round(weather.main.temp - 273.15)
         return (
             <div>
-                <div className={classes.root}>
-                    <div className={classes.card}>
-                        <Typography variant={"h3"}>{celsius} ℃</Typography>
-                        <Typography
-                            variant={"h4"}>{weather.name}, {weather.sys.country}</Typography>
-                        <Typography variant={"h6"}>
-                            {weather.weather[0].main}, Wind
-                            - {weather.wind.speed} meter per second
-                        </Typography>
-                        {Boolean(!arr.filter(item => JSON.stringify(item.coords) === JSON.stringify(myLocation)).length) &&
-                        <AddIcon onClick={saveCity}/>
-                        }
+                <Box border={1} className={classes.root}>
+                    <div className={classes.container}>
+                        <div className={classes.card}>
+                            <Typography variant={"h3"}>{celsius} ℃</Typography>
+                            <Typography
+                                variant={"h4"}>{weather.name}, {weather.sys.country}</Typography>
+                            <Typography variant={"h6"}>
+                                {weather.weather[0].main}, Wind
+                                - {weather.wind.speed} meter per second
+                            </Typography>
+                        </div>
                     </div>
-                </div>
+                    {Boolean(!arr.filter(item => JSON.stringify(item.coords) === JSON.stringify(myLocation)).length) &&
+                    <div className={classes.addBut}>
+                        <AddIcon onClick={saveCity}/>
+                    </div>
+                    }
+                </Box>
             </div>
         )
     }

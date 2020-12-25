@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
 import {getTomorrowWeather} from "../../actions/getWeather";
-import {Typography} from "@material-ui/core";
+import {Box, Typography} from "@material-ui/core";
 import {Map, Placemark, YMaps} from "react-yandex-maps";
 import {makeStyles} from "@material-ui/core/styles";
 
@@ -19,32 +19,40 @@ const useStyles = makeStyles((theme) => ({
     day: {
         display: "flex",
         justifyContent: "start",
-        padding:5
+        padding: 5
     },
     map: {
-        width: theme.spacing(50),
+        width: theme.spacing(100),
         height: theme.spacing(50),
     },
-    time:{
+    time: {
         width: theme.spacing(8)
+    },
+    container: {
+        marginRight: 50
     }
 }));
 
 export const DayTomorrowWeather = () => {
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ]
     const classes = useStyles()
     const myLocation = useSelector((state) => state.myLocation)
     const [data, setData] = useState([])
+    const currentDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+    const day = currentDate.getDate()
 
     const fetchDayWeather = async () => {
         const newDay = await getTomorrowWeather(myLocation)
         setData(newDay)
     }
     useEffect(() => fetchDayWeather(), [myLocation])
-    const weatherDay = data.map(item =>{
-        return(
+    const weatherDay = data.map(item => {
+        return (
             <div className={classes.day}>
                 <Typography className={classes.time}>
-                    {new Date(item.dt * 1000).getHours()}:{new Date(item.dt).getMinutes()}
+                    {new Date(item.dt * 1000).getHours()}:00
                 </Typography>
                 <Typography>
                     {Math.round(item.main.temp - 273.15)} ℃,
@@ -56,7 +64,8 @@ export const DayTomorrowWeather = () => {
                     Wind - {item.wind.speed} meter per seconds
                 </Typography>
             </div>
-        )})
+        )
+    })
     const mapData = {
         center: [myLocation.latitude, myLocation.longitude],
         zoom: 8,
@@ -68,13 +77,23 @@ export const DayTomorrowWeather = () => {
 
     return (
         <div className={'container'}>
-            <div className={classes.card}>{weatherDay}</div>
+            <div className={classes.container}>
+                <Typography variant={'h4'}>Tomorrow</Typography>
+                <Typography variant={'h5'}>{monthNames[new Date().getMonth()]},{day} </Typography>
+                <div className={"title_container"}>
+                    <div className={classes.time}>Time</div>
+                    <div>Weather</div>
+                </div>
+                {weatherDay}
+            </div>
             <div>
-                <YMaps>
-                    <Map defaultState={mapData}>
-                        {coordinates.map(coordinate => <Placemark geometry={coordinate} />)}
-                    </Map>
-                </YMaps>
+                <Box border={1}>
+                    <YMaps>
+                        <Map defaultState={mapData} className={classes.map}>
+                            {coordinates.map(coordinate => <Placemark geometry={coordinate}/>)}
+                        </Map>
+                    </YMaps>
+                </Box>
             </div>
         </div>
     )

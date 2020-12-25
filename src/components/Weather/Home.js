@@ -1,22 +1,16 @@
 import React from "react";
-import {Typography} from "@material-ui/core";
+import {Box, Grid, Paper, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {saveCityInfo} from "../../actions/getWeather";
 import {useDispatch, useSelector} from "react-redux";
 
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        width: "max",
-        display: "flex"
-    },
     card: {
-        height: theme.spacing(15),
-        width: theme.spacing(15),
-        background: '#DCDCDC',
+        display:"flex",
+        justifyContent:"center",
         margin: 20,
-        borderRadius: 10,
-        padding: 10
+        height: 140,
     }
 }));
 
@@ -28,13 +22,18 @@ export const Home = () => {
 
     const favorites = arr.map(item => {
         return (
-            <div key={Math.random()} className={classes.card}
-                 onClick={()=>{dispatch(saveCityInfo(item.coords)) }}>
-                <Typography component={'div'} >{item.city}</Typography>
-            </div>
+            <Grid item xs={2} >
+                <Box border={1} className={classes.card} onClick={()=>{dispatch(saveCityInfo(item.coords)) }}>
+                    <Typography component={'div'} >{item.city}</Typography>
+                </Box>
+            </Grid>
         )
     })
 
-    return (<div className={classes.root}>{favorites}</div>)
+    return (
+        <Grid container spacing={12}>
+            {favorites}
+        </Grid>
+    )
 
 }
