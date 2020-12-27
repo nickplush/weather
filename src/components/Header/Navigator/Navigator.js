@@ -1,31 +1,39 @@
-import React, {useState} from "react";
-import {useDispatch} from "react-redux";
-import {BottomNavigation, BottomNavigationAction} from "@material-ui/core";
-import {switchOnToday, switchOnTomorrow, switchOnWeek} from "../../../actions/changeWindow";
+import React, { useState, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
-export default function Navigator() {
-    const dispatch = useDispatch()
-    const [value, setValue] = useState('')
+import {
+    BottomNavigation,
+    BottomNavigationAction,
+} from '@material-ui/core';
 
-    const todayWindow = () => {
-        dispatch(switchOnToday())
-    }
-    const tomorrowWindow = () => {
-        dispatch(switchOnTomorrow())
-    }
-    const weekWindow = () => {
-        dispatch(switchOnWeek())
-    }
+import {
+    switchOnToday,
+    switchOnTomorrow,
+    switchOnWeek,
+} from '../../../actions/changeWindow';
+
+const Navigator = () => {
+    const dispatch = useDispatch();
+
+    const [page, setPage] = useState('');
+
+    const onPageChange = useCallback((event, newValue) => setPage(newValue), []);
+
+    const onTodayClick = useCallback(() => dispatch(switchOnToday()), []);
+    const onTomorrowClick = useCallback(() => dispatch(switchOnTomorrow()), []);
+    const onWeekClick = useCallback(() => dispatch(switchOnWeek()), []);
+
     return (
         <BottomNavigation
-            value={value}
-            onChange={(event, newValue) => {
-                setValue(newValue);
-            }}
-            showLabels>
-            <BottomNavigationAction label="Today" onClick={todayWindow}/>
-            <BottomNavigationAction label="Tomorrow" onClick={tomorrowWindow}/>
-            <BottomNavigationAction label="Week" onClick={weekWindow}/>
+            value={page}
+            onChange={onPageChange}
+            showLabels
+        >
+            <BottomNavigationAction label="Today" onClick={onTodayClick}/>
+            <BottomNavigationAction label="Tomorrow" onClick={onTomorrowClick}/>
+            <BottomNavigationAction label="Week" onClick={onWeekClick}/>
         </BottomNavigation>
     );
-}
+};
+
+export default Navigator;

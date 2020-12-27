@@ -1,0 +1,23 @@
+.root {
+    width: 100%;
+    display: flex;
+}
+
+.container {
+    width: 98%;
+    display: flex;
+    justify-content: center;
+    align-content: start;
+}
+
+.card {
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.addBut {
+    margin-top: 96px;
+    margin-right: 10px;
+}

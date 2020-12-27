@@ -1,14 +1,10 @@
-export default function (state = "Home", action) {
+import * as actions from '../actions/changeWindow';
+
+export default function (state = 'Home', action) {
     switch (action.type) {
-        case 'TODAY':
-            return action.payload
-        case 'TOMORROW':
-            return action.payload
-        case 'WEEK':
-            return action.payload
-        case 'HOME':
-            return action.payload
-        default:
-            return state
+    case actions.MEANTIME:
+        return action.payload;
+    default:
+        return state;
     }
 }

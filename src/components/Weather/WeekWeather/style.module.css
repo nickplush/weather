@@ -1,0 +1,17 @@
+.root {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.container{
+
+    width: 80%;
+}
+
+.card {
+    height: 120px;
+    width: 120px;
+    margin: 20px;
+    padding: 10px;
+}

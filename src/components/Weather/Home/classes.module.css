@@ -1,0 +1,19 @@
+.card {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    height: 140px;
+}
+.root {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.container{
+    width: 80%;
+}
+.main{
+    text-align: center;
+}

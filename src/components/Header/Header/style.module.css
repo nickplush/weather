@@ -1,0 +1,9 @@
+.root {
+    flex-grow: 1;
+}
+
+.toolbar {
+    background: white;
+    display: flex;
+    justify-content: space-between;
+}
