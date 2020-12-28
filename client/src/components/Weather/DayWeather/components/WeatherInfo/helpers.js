@@ -1,8 +1,7 @@
 const getDateTime = (weatherItem) => {
     const date = new Date(weatherItem.dt * 1000);
     const hours = date.getHours();
-    const minutes = date.getMinutes();
-    return `${hours}:${minutes}`;
+    return `${hours}:00`;
 };
 
 const getTemperature = (weatherItem) => {
@@ -20,7 +19,7 @@ const getWindSpeed = (weatherItem) => {
 
 const getWeatherCity = (weatherItem) => `${weatherItem.name}, ${weatherItem.sys.country}`;
 
-export const getWeatherInfo = (weatherItem, timezoneOffset) => {
+export const getWeatherInfo = (weatherItem) => {
     const dateTime = getDateTime(weatherItem);
     const temperature = getTemperature(weatherItem);
     const weatherType = getWeatherType(weatherItem);
