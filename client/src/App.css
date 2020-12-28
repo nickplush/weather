@@ -3,6 +3,11 @@
   justify-content: center;
   margin: 25px;
 }
+a {
+  text-decoration: none;
+  margin: 5px;
+  color: darkgrey;
+}
 .border{
   border: 1px;
 }

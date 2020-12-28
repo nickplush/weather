@@ -10,6 +10,7 @@ import {
 import { saveCityInfo } from '../../../actions/city';
 
 import classes from './classes.module.css';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const Home = () => {
         return (
             <Grid key={coords.latitude} item xs={2} >
                 <Box border={1} className={classes.card} onClick={() => changeCity(coords)}>
-                    <Typography component="div" >{city}</Typography>
+                    <Link to={`/today/${city}`}><Typography component="div" >{city}</Typography></Link>
                 </Box>
             </Grid>
         );
