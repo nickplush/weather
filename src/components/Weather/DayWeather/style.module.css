@@ -1,7 +1,8 @@
 .day {
     display: flex;
-    justify-content: start;
+    justify-content: space-around;
     padding: 5px;
+    width: 100%;
 }
 
 .map {
@@ -10,7 +11,10 @@
 }
 
 .time {
-    width: 64px;
+    width: 45px;
+}
+.weather {
+    margin: 15px;
 }
 
 .container {

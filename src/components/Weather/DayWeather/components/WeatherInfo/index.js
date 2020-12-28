@@ -18,13 +18,13 @@ const WeatherInfo = ({ classes, weather }) => weather.map(item => {
             <Typography className={classes.time}>
                 {dateTime}
             </Typography>
-            <Typography>
+            <Typography className={classes.weather}>
                 {temperature}
             </Typography>
-            <Typography>
+            <Typography className={classes.weather}>
                 {weatherType}
             </Typography>
-            <Typography>
+            <Typography className={classes.weather}>
                 {windSpeed}
             </Typography>
         </div>
