@@ -25,7 +25,7 @@ const Home = () => {
             city,
         } = item;
         return (
-            <Grid key={Math.random} item xs={2} >
+            <Grid key={coords.latitude} item xs={2} >
                 <Box border={1} className={classes.card} onClick={() => changeCity(coords)}>
                     <Typography component="div" >{city}</Typography>
                 </Box>

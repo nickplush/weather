@@ -16,6 +16,7 @@ const WeatherInfo = ({
         windSpeed,
         temperature,
         city,
+        weatherType,
     } = getWeatherInfo(weather);
     const isLocationUnsaved = !favorites.some(favorite => isCoordsTheSame(myLocation, favorite));
     return (
@@ -25,7 +26,8 @@ const WeatherInfo = ({
                     <div className={classes.card}>
                         <Typography variant={'h3'}>{temperature}</Typography>
                         <Typography variant={'h4'}>{city}</Typography>
-                        <Typography variant={'h6'}> {windSpeed}</Typography>
+                        <Typography variant={'h6'}>{weatherType} </Typography>
+                        <Typography variant={'h6'}>{windSpeed}</Typography>
                     </div>
                 </div>
                 {isLocationUnsaved && (

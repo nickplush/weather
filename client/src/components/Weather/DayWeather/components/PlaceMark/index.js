@@ -25,7 +25,6 @@ const PlaceMark = ({ location }) => {
                 geometry={coordinate}
                 {...property}
             />);
-        console.log('1', weather);
         const {
             temperature,
             weatherType,

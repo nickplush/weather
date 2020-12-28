@@ -5,7 +5,6 @@ const getDateTime = (weatherItem) => {
 };
 
 const getTemperature = (weatherItem) => {
-    console.log('2', weatherItem);
     const { temp: kelvinTemp } = weatherItem.main;
     const celsiusTemp = Math.round(kelvinTemp - 273.15);
     return `${celsiusTemp} ℃`;

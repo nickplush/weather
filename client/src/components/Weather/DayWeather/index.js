@@ -36,11 +36,22 @@ const DayWeather = ({ day }) => {
             <div className={classes.container}>
                 <Typography variant="h3">{dayTitle}</Typography>
                 <Typography variant="h5">{date}</Typography>
-                <div className="title_container">
-                    <div className={classes.time}>Time</div>
-                    <div>Weather</div>
-                </div>
-                <WeatherInfo classes={classes} weather={todayWeather}/>
+                <table>
+                    <thead>
+                        <tr>
+                            <td className={classes.time}>
+                            Time
+                            </td>
+                            <td>
+                            Weather
+                            </td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <WeatherInfo classes={classes} weather={todayWeather}/>
+                    </tbody>
+                </table>
             </div>
             <div>
                 <LocationMap location={myLocation} classes={classes} />

@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Typography } from '@material-ui/core';
-
 import { getWeatherInfo } from './helpers';
 import { array, object } from 'prop-types';
 
@@ -14,20 +12,20 @@ const WeatherInfo = ({ classes, weather }) => weather.map(item => {
     } = getWeatherInfo(item);
 
     return (
-        <div key = {Math.random} className={classes.day}>
-            <Typography className={classes.time}>
+        <tr key={dateTime}>
+            <td className={classes.time}>
                 {dateTime}
-            </Typography>
-            <Typography className={classes.weather}>
+            </td>
+            <td className={classes.weather}>
                 {temperature}
-            </Typography>
-            <Typography className={classes.weather}>
+            </td>
+            <td className={classes.weather}>
                 {weatherType}
-            </Typography>
-            <Typography className={classes.weather}>
+            </td>
+            <td className={classes.weather}>
                 {windSpeed}
-            </Typography>
-        </div>
+            </td>
+        </tr>
     );
 });
 

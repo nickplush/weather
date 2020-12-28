@@ -1,7 +1,6 @@
 .day {
     display: flex;
-    justify-content: space-around;
-    padding: 5px;
+    justify-content: start;
     width: 100%;
 }
 
@@ -14,7 +13,8 @@
     width: 45px;
 }
 .weather {
-    margin: 15px;
+    text-align: center;
+    padding: 10px;
 }
 
 .container {

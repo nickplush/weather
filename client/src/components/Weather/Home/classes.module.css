@@ -4,6 +4,7 @@
     justify-content: center;
     margin: 20px;
     height: 140px;
+    cursor: pointer;
 }
 .root {
     width: 100%;

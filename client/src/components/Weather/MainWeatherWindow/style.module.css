@@ -18,6 +18,7 @@
 }
 
 .addBut {
+    cursor: pointer;
     margin-top: 96px;
     margin-right: 10px;
 }
