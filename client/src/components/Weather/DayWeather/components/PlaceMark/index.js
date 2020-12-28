@@ -18,30 +18,31 @@ const PlaceMark = ({ location }) => {
     };
 
     useEffect(() => getWeatherOfMyLocation(), [myLocation]);
+    if (weather) {
+        const renderPlaceMarks = (location) => getCoords(location).map(coordinate =>
+            <Placemark
+                key={Math.random()}
+                geometry={coordinate}
+                {...property}
+            />);
+        console.log('1', weather);
+        const {
+            temperature,
+            weatherType,
+        } = getWeatherInfo(weather);
 
-    const renderPlaceMarks = (location) => getCoords(location).map(coordinate =>
-        <Placemark
-            key={Math.random()}
-            geometry={coordinate}
-            {...property}
-        />);
+        const property = {
+            properties: {
+                balloonContent: `${temperature}, ${weatherType}`,
+            },
+            modules: ['geoObject.addon.balloon', 'geoObject.addon.hint'],
+        };
 
-    const {
-        temperature,
-        weatherType,
-    } = getWeatherInfo(weather);
-
-    const property = {
-        properties: {
-            hintContent: 'Это хинт',
-            balloonContent: `${temperature}, ${weatherType}`,
-        },
-        modules: ['geoObject.addon.balloon', 'geoObject.addon.hint'],
-    };
-
-    return (
-        renderPlaceMarks(location)
-    );
+        return (
+            renderPlaceMarks(location)
+        );
+    }
+    return null;
 };
 
 PlaceMark.propTypes = {
