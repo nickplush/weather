@@ -3,13 +3,13 @@ import { Box } from '@material-ui/core';
 import React from 'react';
 import { object } from 'prop-types';
 import PlaceMark from '../PlaceMark';
+import { mapConfig } from './helpers';
 
 const LocationMap = ({ location, classes }) => {
-    const config = (location) => ({ center: [location.latitude, location.longitude], zoom: 8 });
     return (
         <Box border={1}>
             <YMaps>
-                <Map state={config(location)} className={classes.map}>
+                <Map state={mapConfig(location)} className={classes.map}>
                     <PlaceMark location={location}/>
                 </Map>
             </YMaps>

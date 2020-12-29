@@ -39,15 +39,10 @@ const DayWeather = ({ day }) => {
                 <table>
                     <thead>
                         <tr>
-                            <td className={classes.time}>
-                            Time
-                            </td>
-                            <td>
-                            Weather
-                            </td>
+                            <td className={classes.time}>Time</td>
+                            <td>Weather</td>
                         </tr>
                     </thead>
-
                     <tbody>
                         <WeatherInfo classes={classes} weather={todayWeather}/>
                     </tbody>

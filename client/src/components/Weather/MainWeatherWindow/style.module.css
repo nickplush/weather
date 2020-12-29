@@ -7,7 +7,7 @@
     width: 98%;
     display: flex;
     justify-content: center;
-    align-content: start;
+    align-content: flex-start;
 }
 
 .card {
